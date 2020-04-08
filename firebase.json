@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/Boat-Runner",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

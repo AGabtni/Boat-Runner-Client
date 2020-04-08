@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic&amp;subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Cabin|Lakki+Reddy|Rubik|Ubuntu&display=swap');
+
+
+@import '~@angular/material/theming';
+
+
+$general-typography: mat-typography-config(
+  $font-family: '"Ubuntu", sans-serif',
+  $body-2:        mat-typography-level(14px, 24px,600)  ,
+  $headline:      mat-typography-level(50px, 60px,700) ,
+  $title :      mat-typography-level(20px, 32px,700),
+  $button : mat-typography-level(30px, 40px,1000),
+  
+);
+
+$secondary-typography: mat-typography-config(
+  $font-family: 'Roboto, sans-serif'
+);
+
+
+@include mat-core($general-typography);
+
+
+$my-app-primary: mat-palette($mat-indigo);
+$my-app-accent:  mat-palette($mat-amber, A200, A100, A400);
+$my-app-warn:    mat-palette($mat-red);
+
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+
+
+@include angular-material-theme($my-app-theme);
+@include mat-core-theme($my-app-theme);
+@include mat-button-theme($my-app-theme);
+@include mat-checkbox-theme($my-app-theme);
+
