@@ -1,255 +1,240 @@
 <div fxFlex id="gameContainer" [@ScaleScreen]="this.isPreviewVisible ? 'scaleUp':'scaleUp'">
-  <div fxFlex fxFlexFill fxLayout="column" fxLayoutAlign="center">
-    <!--PREVIEW PANEL-->
+    <div fxFlex fxFlexFill fxLayout="column" fxLayoutAlign="center">
 
-    <div fxFlex fxLayout="column" id="previewScreen" fxLayoutAlign="center"
-      [@HUDFadeIn]="this.isPreviewVisible? 'fadeIn' : 'fadeOut'">
+        <!--PREVIEW PANEL-->
+        <div fxFlex fxLayout="column" class="overlay-panel" id="previewScreen" fxLayoutAlign="center" [@HUDFadeIn]="this.isPreviewVisible? 'fadeIn' : 'fadeOut'">
+            <div style="z-index : 0;width: 100%;height: 100%; margin: 0 auto; left: 0; top:0; position: absolute ;background-color: rgba(0, 0, 0, 0.4)">
+            </div>
+            <video style="z-index:-1;width: 100%;height: 100%; margin: 0 auto; left: 0; top:0; position: absolute ;filter: blur(5px); " (click)="toggleVideo()" playsinline loop autoplay #videoPlayer>
+                <source src="../assets/videos/Preview_1.mp4" type="video/mp4" />
+                Browser not supported
+            </video>
+            <div>
+                <button id="playButton" class="hvr-grow" mat-fab (click)="onPlayClick()">Play
+                </button>
 
-      <div fxFlex fXFlexFill fxLayout="row" fxLayoutAlign="center center">
+                <span class="mat-h2 animate__animated animate__fadeInDownBig" style="font-weight: 900;position: absolute; left: 0; bottom :0; color : white; margin : 5px 10px">
+                    Boat Runner
+                </span>
 
-        <button id="playButton" mat-fab (click)="onPlayClick()">Play
-        </button>
-
-      </div>
-      <div fxFlex fxLayout="row" fxLayoutAlign="center end">
-        <span class="mat-h2" style="font-weight: 900;text-align: center; margin: 20px;">
-          Infinite Runner with Three.js
-        </span>
-      </div>
-
-
-    </div>
-
-    <!--MESSAGE PANEL-->
-    <div fxFlex fxLayout="column" class="overlay-panel" id="messagesScreen" fxLayoutAlign="center center">
-      <span id="messageContent" class="mat-h1"></span>
-    </div>
-
-    <div fxFlex class="game-container">
-
-
-
-
-      <canvas fxFlex fxLayout="row" fxFlexFill id="c" tabindex="1"></canvas>
-
-      <!--START SCREEN-->
-      <div fxLayout="column" class="overlay-panel" id="startScreen" fxLayoutAlign="center center"
-        [@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible && this.isStartScreenVisible ? 'fadeIn' : 'fadeOut'">
-
-        <div fxLayout="row" fxLayoutAlign="center">
-
-          <span style="text-align: center;" class="mat-h1">Infinite runner</span>
-
-        </div>
-
-        <div fxFlexFill fxFlex fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
-
-
-          <!-- Home Menu -->
-          <div class="menu" id="startMenu" [@HUDFadeIn]="this.isHomeMenuVisible ? 'fadeIn' : 'fadeOut'" fxFlex
-            fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
-
-
-            <button id="menuButton" (click)="onStartClick()">NEW GAME</button>
-            <button id="menuButton" (click)="getScores()">Most wanted sailors</button>
-            <button id="menuButton" (click)="refresh()">QUIT</button>
-
-
-
-
-          </div>
-
-
-
-          <!--Score board -->
-          <div id="startMenu" class="menu" [@HUDFadeIn]="!this.isHomeMenuVisible ? 'fadeIn' : 'fadeOut'" fxFlex
-            fxLayout="column" fxLayoutGap="20px">
-
-            <div fxLayout="row" fxLayoutAlign="end">
-              <button id="backButton" (click)="backHome()">
-
-                <img src="../assets/icons/arrow_back.svg">
-
-              </button>
-
+                <span class="mat-h2 animate__animated animate__fadeInUpBig" style="font-weight: 900;position: absolute; right: 0; top :0; color : white ; margin : 5px 10px">
+                    Made with Three.js
+                </span>
 
             </div>
-            <table class="mat-elevation-z8 scoreTable">
-              <tr>
-                <th mat-header-cell> Name </th>
-                <th mat-header-cell> Score </th>
+        </div>
 
-              </tr>
-              
-                <tr *ngFor="let score of scores">
-                  <td mat-cell style="align-items: start"> {{score.Name}} </td>
-                  <td mat-cell style="align-items: end"> {{score.Score}} </td>
-                </tr>
-            </table>
+        <!--MESSAGE PANEL-->
+        <div fxFlex fxLayout="column" class="overlay-panel" id="messagesScreen" fxLayoutAlign="center center">
+            <span id="messageContent" class="mat-h1"></span>
+        </div>
+        <!--GAME PANEL-->
+        <div fxFlex class="game-container">
 
-            <!--
+            <canvas fxFlex fxLayout="row" fxFlexFill id="c" tabindex="1"></canvas>
+
+            <!--START SCREEN-->
+            <div fxLayout="column" class="overlay-panel" id="startScreen" fxLayoutAlign="center center" [@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible && this.isStartScreenVisible ? 'fadeIn' : 'fadeOut'">
+
+                <div fxLayout="row" fxLayoutAlign="center">
+
+                    <span style="text-align: center;" class="mat-h1">Infinite runner</span>
+
+                </div>
+
+                <div fxFlexFill fxFlex fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+
+                    <!-- Home Menu -->
+                    <div class="menu" id="startMenu" [@HUDFadeIn]="this.isHomeMenuVisible ? 'fadeIn' : 'fadeIn'" fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+                        <button id="menuButton" class="hvr-grow" (click)="onStartClick()">NEW GAME</button>
+                        <button id="menuButton" class="hvr-grow" (click)="getScores()">Most wanted sailors</button>
+                        <button id="menuButton" class="hvr-grow" (click)="refresh()">QUIT</button>
+                    </div>
+
+
+
+                    <!--Score board -->
+                    <div id="" class="menu" [@HUDFadeIn]="!this.isHomeMenuVisible ? 'fadeIn' : 'fadeOut'" fxFlex fxLayout="column" fxLayoutGap="20px">
+
+                        <div fxLayout="row" fxLayoutAlign="end">
+                            <button id="backButton" (click)="backHome()">
+
+                                <img src="../assets/icons/arrow_back.svg">
+
+                            </button>
+
+
+                        </div>
+                        <div fxFlex fxLayout="column" style="align-items: center;">
+                            <table class="mat-elevation-z8 scoreTable">
+                                <tr>
+                                    <th mat-header-cell> Name </th>
+                                    <th mat-header-cell> Score </th>
+
+                                </tr>
+
+                                <tr *ngFor="let score of scores">
+                                    <td mat-cell style="align-items: start"> {{score.Name}} </td>
+                                    <td mat-cell style="align-items: end"> {{score.Score}} </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!--
             <li fxFlex *ngFor="let score of scores" fxLayout="column" fxLayoutAlign="center">
                {{score.Score}}
 
             </li>
             -->
-          </div>
+                    </div>
 
-
-        </div>
-
-      </div>
-
-      <!--GAME OVER LAYER-->
-      <div id="gameOverScreen" class="overlay-panel" fxLayout="column" fxFlexFill fxLayoutAlign="center center">
-
-
-        <div fxFlex fxFlexFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" class="menu"
-          id="gameOverMenu">
-
-
-
-          <div class="sub-menu" fxFlex fxLayout="column" fxLayoutGap="20px"
-            [@HUDFadeIn]="!this.isGameOverMenuVisible ? 'fadeIn' : 'fadeOut' ">
-
-            <div fxFlexFill fxLayoutAlign="end">
-              <button id="saveButton" (click)="backGameOver()">
-                <img src="../assets/icons/arrow_back.svg">
-
-              </button>
-            </div>
-
-            <div fxLayout="column" fxFlex fxFlexFill fxLayoutAlign="start center">
-
-              <div class="form-group">
-                <label for="alterEgo">Your Score</label>
-                <span class="mat-h2 form-control">{{this.score}}</span>
-              </div>
-              <form class="form form-row" fxLayout="column wrap" fxLayoutGap="20px" [formGroup]="scoreForm"
-                (ngSubmit)="saveScore(scoreForm.value)">
-                <div>
-
-                  <!--SAILOR NAME FIELD-->
-                  <mat-form-field data-aos="fade-right" data-aos-easing="ease-in-back" data-aos-delay="400"
-                    data-aos-offset="300" data-aos-duration="1000" data-aos-once="true" appearance="outline">
-                    <mat-label>Your Name</mat-label>
-                    <input matInput formControlName="name">
-                  </mat-form-field>
 
                 </div>
-                <button type="submit" class="btn btn-success" id="saveButton">
-                  <img src="../assets/icons/save_icon.svg">
-                </button>
 
-              </form>
+            </div>
 
+            <!--GAME OVER LAYER-->
+            <div id="gameOverScreen" class="overlay-panel" fxLayout="column" fxFlexFill fxLayoutAlign="center center">
+
+
+                <div fxFlex fxFlexFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" class="menu" id="gameOverMenu">
+
+
+
+                    <div class="sub-menu" fxFlex fxLayout="column" fxLayoutGap="20px" [@HUDFadeIn]="!this.isGameOverMenuVisible ? 'fadeIn' : 'fadeOut' ">
+
+                        <div fxFlexFill fxLayoutAlign="end">
+                            <button id="saveButton" (click)="backGameOver()">
+                                <img src="../assets/icons/arrow_back.svg">
+
+                            </button>
+                        </div>
+
+                        <div fxLayout="column" fxFlex fxFlexFill fxLayoutAlign="start center">
+
+                            <div class="form-group">
+                                <label for="alterEgo">Your Score</label>
+                                <span class="mat-h2 form-control">{{this.score}}</span>
+                            </div>
+                            <form class="form form-row" fxLayout="column wrap" fxLayoutGap="20px" [formGroup]="scoreForm" (ngSubmit)="saveScore(scoreForm.value)">
+                                <div>
+
+                                    <!--SAILOR NAME FIELD-->
+                                    <mat-form-field data-aos="fade-right" data-aos-easing="ease-in-back" data-aos-delay="400" data-aos-offset="300" data-aos-duration="1000" data-aos-once="true" appearance="outline">
+                                        <mat-label>Your Name</mat-label>
+                                        <input matInput formControlName="name">
+                                    </mat-form-field>
+
+                                </div>
+                                <button type="submit" class="btn btn-success" id="saveButton">
+                                    <img src="../assets/icons/save_icon.svg">
+                                </button>
+
+                            </form>
+
+
+
+                        </div>
+
+                        <div fxFlex fxFlexFill fxLayout="row" fxLayoutAlign="center">
+                            <span>{{this.apiMessage}}</span>
+                        </div>
+
+                    </div>
+
+                    <div class="sub-menu" fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" [@HUDFadeIn]="this.isGameOverMenuVisible ? 'fadeIn' : 'fadeOut' ">
+
+                        <button id="menuButton" (click)="onSaveScoreClick()">SAVE SCORE</button>
+                        <button id="menuButton" (click)="replay()">RESTART</button>
+                        <button id="menuButton" (click)="refresh()">QUIT</button>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <!--LOADING SCREEN-->
+            <div fxFlex fxLayout="column" class="overlay-panel" id="loadingScreen" fxLayoutAlign="center center" [@HUDFadeIn]="this.isLoading && !this.isPreviewVisible? 'fadeIn' : 'fadeOut'">
+                <div>
+                    <div>...loading...</div>
+                    <div class="progress">
+                        <div id="progressbar"></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--PLAYERSTATS LAYER-->
+            <div id="playerStats" class="overlay-panel" fxFlex fxLayout="column" fxLayoutAlign="start" fxLayoutGap="20px" [@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible && !this.isStartScreenVisible ? 'fadeIn' : 'fadeOut'">
+                <div>
+                    <div class="health-box">
+                        <div class="health-bar"></div>
+                        <div class="health-bar-filled"></div>
+
+                    </div>
+                </div>
+
+
+                <div id="score" fxLayout="row" fxLayoutAlign="center center">
+
+                    <span class="mat-h2"></span>
+                </div>
 
 
             </div>
 
-            <div fxFlex fxFlexFill fxLayout="row" fxLayoutAlign="center">
-              <span>{{this.apiMessage}}</span>
+            <!--PAUSE MENU LAYER-->
+            <div id="pauseScreen" class="overlay-panel" fxLayout="column" fxLayoutAlign="center center" [@HUDFadeIn]="this.isPauseMenuVisible? 'fadeIn' : 'fadeOut'">
+                <div class="menu" id="pauseMenu" fxFlexFill fxFlex fxLayout="column" fxLayoutAlign="center center">
+
+                    <div class="sub-menu" fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+                        <button id="menuButton" (click)="togglePause()">RESUME</button>
+                        <button id="menuButton" (click)="replay()">RESTART</button>
+                        <button id="menuButton" (click)="refresh()">QUIT</button>
+                    </div>
+
+                </div>
+
             </div>
 
-          </div>
 
-          <div class="sub-menu" fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px"
-            [@HUDFadeIn]="this.isGameOverMenuVisible ? 'fadeIn' : 'fadeOut' ">
 
-            <button id="menuButton" (click)="onSaveScoreClick()">SAVE SCORE</button>
-            <button id="menuButton" (click)="replay()">RESTART</button>
-            <button id="menuButton" (click)="refresh()">QUIT</button>
+            <!--CONTROLS LAYER-->
+            <div class="overlay-panel" fxLayout="column" fxLayoutAlign="center">
+                <div style="z-index: 4;" fxLayout="row wrap" fxLayoutAlign="end" [@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible ? 'fadeIn' : 'fadeOut'">
+                    <button id="audioButton" (click)="toggleAudio()">
+                        <img src="../assets/icons/audio_on.svg">
+                    </button>
 
-          </div>
+                </div>
+                <div fxFlex fxLayout="column" id="ui">
+                    <div fxFlex fxLayout="row" fxLayoutAlign="end end">
+
+
+                        <button id="pauseButton" (click)="togglePause()">
+                            <img src="../assets/icons/pauseOutline.svg">
+                        </button>
+                    </div>
+
+                    <div id="controls" fxLayout="row" fxLayoutAlign="end">
+                        <div id="left"><img src="https://threejsfundamentals.org/threejs/resources/images/left.svg">
+                        </div>
+                        <div fxFlex></div>
+                        <div id="right"><img src="https://threejsfundamentals.org/threejs/resources/images/right.svg">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
 
 
         </div>
-
-      </div>
-
-      <!--LOADING SCREEN-->
-      <div fxFlex fxLayout="column" class="overlay-panel" id="loadingScreen" fxLayoutAlign="center center"
-        [@HUDFadeIn]="this.isLoading && !this.isPreviewVisible? 'fadeIn' : 'fadeOut'">
-        <div>
-          <div>...loading...</div>
-          <div class="progress">
-            <div id="progressbar"></div>
-          </div>
-        </div>
-      </div>
-
-
-      <!--PLAYERSTATS LAYER-->
-      <div id="playerStats" class="overlay-panel" fxFlex fxLayout="column" fxLayoutAlign="start" fxLayoutGap="20px"
-        [@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible && !this.isStartScreenVisible ? 'fadeIn' : 'fadeOut'">
-        <div>
-          <div class="health-box">
-            <div class="health-bar"></div>
-            <div class="health-bar-filled"></div>
-
-          </div>
-        </div>
-
-
-        <div id="score" fxLayout="row" fxLayoutAlign="center center">
-
-          <span class="mat-h2"></span>
-        </div>
-
-
-      </div>
-
-      <!--PAUSE MENU LAYER-->
-      <div id="pauseScreen" class="overlay-panel" fxLayout="column" fxLayoutAlign="center center"
-        [@HUDFadeIn]="this.isPauseMenuVisible? 'fadeIn' : 'fadeOut'">
-        <div class="menu" id="pauseMenu" fxFlexFill fxFlex fxLayout="column" fxLayoutAlign="center center">
-
-          <div class="sub-menu" fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
-            <button id="menuButton" (click)="togglePause()">RESUME</button>
-            <button id="menuButton" (click)="replay()">RESTART</button>
-            <button id="menuButton" (click)="refresh()">QUIT</button>
-          </div>
-
-        </div>
-
-      </div>
-
-
-
-      <!--CONTROLS LAYER-->
-      <div class="overlay-panel" fxLayout="column" fxLayoutAlign="center">
-        <div style="z-index: 4;" fxLayout="row wrap" fxLayoutAlign="end"
-          [@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible ? 'fadeIn' : 'fadeOut'">
-          <button id="audioButton" (click)="toggleAudio()">
-            <img src="../assets/icons/audio_on.svg">
-          </button>
-
-        </div>
-        <div fxFlex fxLayout="column" id="ui">
-          <div fxFlex fxLayout="row" fxLayoutAlign="end end">
-
-
-            <button id="pauseButton" (click)="togglePause()">
-              <img src="../assets/icons/pauseOutline.svg">
-            </button>
-          </div>
-
-          <div id="controls" fxLayout="row" fxLayoutAlign="end">
-            <div id="left"><img src="https://threejsfundamentals.org/threejs/resources/images/left.svg"></div>
-            <div fxFlex></div>
-            <div id="right"><img src="https://threejsfundamentals.org/threejs/resources/images/right.svg"></div>
-          </div>
-        </div>
-
-      </div>
-
-
-
-
-
-
-
     </div>
-  </div>
 
 </div>

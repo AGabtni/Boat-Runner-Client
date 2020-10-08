@@ -1,5 +1,5 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroupDirective, NgForm, Validators, ReactiveFormsModule} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroupDirective, NgForm, Validators, ReactiveFormsModule } from '@angular/forms';
 
 import { APIService } from './classes/apiService.service';
 
@@ -27,7 +27,7 @@ var renderer;
 
 
 var scene, camera, screenShaker;
-var listener = new THREE.AudioListener();
+var listener ;
 
 var water, sky, sunSphere;
 var playerGameObject;
@@ -84,13 +84,13 @@ function loadAnimations() {
 function init() {
 
   const canvas = <HTMLCanvasElement>document.getElementById("c");
-  
+
   //--Renderer Init
-  renderer = new THREE.WebGLRenderer({  canvas });
-
-
+  renderer = new THREE.WebGLRenderer({ canvas });
+  listener = new THREE.AudioListener();
+  listener.setMasterVolume(0);
   globals.audioListener = listener;
-
+  
 }
 
 
@@ -124,7 +124,6 @@ function Start() {
   camera = new THREE.PerspectiveCamera(70, canvas.clientWidth / canvas.clientHeight, 1, 1000);
   camera.position.set(0, 2, 0);
   camera.add(listener);
-
   globals.camera = camera;
   scene.add(camera);
 
@@ -205,7 +204,7 @@ function Start() {
   playerGameObject.getComponent(PlayerController).targetSpeed = 0;
   globals.isPlaying = true;
 
-
+    camera.children[0].setMasterVolume(0.5);
 
 
 
@@ -410,6 +409,7 @@ function Update() {
   obstaclePooler.update();
   inputManager.update();
   screenShaker.update(camera);
+
 }
 
 //Draws scene : 
@@ -436,7 +436,6 @@ function Render(now) {
 
 
   Update();
-
   renderer.render(scene, camera);
   requestAnimationFrame(Render);
 
@@ -506,7 +505,7 @@ function resizeRendererToDisplaySize(renderer) {
   selector: 'app-root',
   templateUrl: './app.component.html',
   providers: [APIService],
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.css','./hover-min.css'],
   animations: [previewPanel, gameMenu, gameScreen]
 })
 export class AppComponent implements AfterViewInit {
@@ -532,7 +531,7 @@ export class AppComponent implements AfterViewInit {
 
 
 
-  constructor(private formBuilder : FormBuilder, private _apiservice: APIService) {
+  constructor(private formBuilder: FormBuilder, private _apiservice: APIService) {
 
     this.isPreviewVisible = true;
     this.isPauseMenuVisible = false;
@@ -545,15 +544,15 @@ export class AppComponent implements AfterViewInit {
     this.score = 0;
 
     this.scoreForm = this.formBuilder.group({
-      'name' : this.nameControl,
-     
-  });
+      'name': this.nameControl,
+
+    });
     this.apiMessage = "";
   }
 
   ngOnInit() {
 
-
+    this.videoplayer.nativeElement.play();
   }
 
   ngAfterViewInit() {
@@ -594,7 +593,7 @@ export class AppComponent implements AfterViewInit {
     this.scoreForm.reset();
     this.score = 0;
     globals.parcouredDistance = 0;
-        
+
   }
 
   onSaveScoreClick() {
@@ -610,8 +609,8 @@ export class AppComponent implements AfterViewInit {
 
       val => {
         this.apiMessage = val;
-       
-        setTimeout(()=>this.backGameOver(), 500);
+
+        setTimeout(() => this.backGameOver(), 500);
       },
       response => {
         this.apiMessage = response.error.text;
@@ -681,7 +680,7 @@ export class AppComponent implements AfterViewInit {
     manager.onLoad = this.onLoadFinished;
     manager.onProgress = (url, itemsLoaded, itemsTotal) => {
 
-      var n = (itemsLoaded / itemsTotal * 100 | 0) + '%';
+      var n = (itemsLoaded / itemsTotal * 100 ) + '%';
       $('#progressbar').animate({
         'width': n
       })
@@ -746,22 +745,20 @@ export class AppComponent implements AfterViewInit {
     if ($("#audioButton").hasClass("clicked")) {
 
       icon += 'off.svg';
-
       camera.children[0].setMasterVolume(0);
 
     } else {
       icon += 'on.svg';
-      camera.children[0].setMasterVolume(1);
+      camera.children[0].setMasterVolume(0.5);
     }
 
     $('#audioButton').find('img').attr('src', icon);
 
   }
 
-  //Play video
-  toggleVideo() {
 
-
+  toggleVideo(event: any) {
+    this.videoplayer.nativeElement.play();
   }
   //In both gameOverScreen and pauseScreen
   replay() {

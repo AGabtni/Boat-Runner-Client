@@ -1,12 +1,9 @@
-.game-container{
-  
+.game-container {
     width: 100%;
     max-width: 750px;
-    
-  }
-  
-  .overlay-panel{
-  
+}
+
+.overlay-panel {
     position: absolute;
     left: 0;
     top: 0;
@@ -14,162 +11,151 @@
     height: 100%;
     display: flex;
     justify-items: center;
-  }
-  
-  
-  #c {
+}
+
+#c {
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     z-index: 1;
-  }
-  
-  
-  
-  #previewScreen{
+}
+
+#previewScreen {
     width: 100%;
     height: 100%;
     align-items: center;
     text-align: center;
     z-index: 5;
-  
-  }
-  
-  
-  #playButton{
-    position: absolute; 
-    width:100px;
-    height:100px;
+}
+
+#backgroundpreview {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    text-align: center;
+    z-index: 6;
+}
+
+#playButton {
+    position: absolute;
+    width: 150px;
+    height: 150px;
     top: 50%;
-      left: 50%;  
-      transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-  }
-  #audioButton{
+    left: 50%;
+    font-size: x-large;
+    font-weight: 700;
+    color: white;
+    background-color: tomato;
+    border: red;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+#audioButton {
     width: 75px;
     height: 75px;
     border-radius: 50%;
     background-color: rgba(0, 0, 0, 0);
     justify-content: flex-end;
-  
-  }
-  #audioButton img{
-    
+}
+
+#audioButton img {
     width: 80%;
     height: 80%;
-  }
-  
-  
-  
-  #startScreen{
+}
+
+#startScreen {
     z-index: 4;
     padding: 20px;
-  
-  }
-  
-  
-  
-  #startMenu{
-  
+}
+
+#startMenu {
     position: absolute;
-    background-color : coral;
-   
-   
-  }
-  
-  .sub-menu{
-  
+    background-color: coral;
+    padding: 20px;
+}
+
+.sub-menu {
     position: absolute;
-    
-    
-  }
-  #scoreBoard{
-  
+}
+
+#scoreBoard {
     background-color: white;
-  }
-  
-  #backButton{
+}
+
+#backButton {
     width: 75px;
     height: 75px;
     border-radius: 50%;
     background-color: rgba(0, 0, 0, 0);
     justify-content: flex-end;
-  
-  }
-  #backButton img{
-    
+}
+
+#backButton img {
     width: 80%;
     height: 80%;
-  }
-  
-  #loadingScreen{
-  
+}
+
+#loadingScreen {
+    background-color: wheat;
     z-index: 3;
-  
-  }
-  
-  .progress {
+}
+
+.progress {
     width: 50vw;
     border: 1px solid black;
-  }
-  
-  #progressbar {
+}
+
+#progressbar {
     width: 0;
     height: 1em;
     background-color: #888;
-    background-image: linear-gradient(
-      -45deg, 
-      rgba(255, 255, 255, .5) 25%, 
-      transparent 25%, 
-      transparent 50%, 
-      rgba(255, 255, 255, .5) 50%, 
-      rgba(255, 255, 255, .5) 75%, 
-      transparent 75%, 
-      transparent
-    );
+    background-image: linear-gradient( -45deg, rgba(255, 255, 255, .5) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .5) 50%, rgba(255, 255, 255, .5) 75%, transparent 75%, transparent);
     background-size: 50px 50px;
-  
-  }
-  
-  #messagesScreen{  
-    z-index: 2;  
-  }
-  
-  #messageContent{
+}
+
+#messagesScreen {
+    z-index: 2;
+}
+
+#messageContent {
     opacity: 0.0;
-  }
-  
-  /**HUD CLASSES */
-  #ui {
+}
+
+
+/**HUD CLASSES */
+
+#ui {
     opacity: 0;
     padding: 20px;
     z-index: 2;
-  }
-  
-  #controls>div {
+}
+
+#controls>div {
     display: flex;
     align-items: flex-end;
     flex: 1 1 auto;
-  }
-  
-  
-  #left {
+}
+
+#left {
     justify-content: flex-end;
-  }
-  #right {
+}
+
+#right {
     justify-content: flex-start;
-  }
-  #controls img {
+}
+
+#controls img {
     padding: 10px;
     width: 80px;
     height: 80px;
     display: block;
-  }
-  
-  
-  #pauseScreen{
+}
+
+#pauseScreen {
     position: absolute;
     padding: 20px;
     left: 0;
@@ -179,67 +165,50 @@
     display: flex;
     align-content: stretch;
     z-index: 3;
-  }
-  
-  #pauseButton img{
-    
+}
+
+#pauseButton img {
     width: 100%;
     height: 100%;
-  }
-  
-  #pauseButton{
+}
+
+#pauseButton {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0);
     justify-content: flex-end;
-  
-  }
-  
-  .menu{
-    
-    
-    max-width: 600px;
-    max-height: 600px;
+}
+
+.menu {
     margin: 10px;
-    padding : 10px;
+    padding: 10px;
     border-radius: 10px;
-  }
-  
-  
-  
-  #pauseMenu{
-    background-color : rgba(0,20,40,0.7);
-  
-    
-    
-  }
-  
-  #gameOverScreen{
-    
+}
+
+#pauseMenu {
+    background-color: rgba(0, 20, 40, 0.7);
+}
+
+#gameOverScreen {
     opacity: 0.0;
     padding: 20px;
-  }
-  
-  
-  #gameOverMenu{
-    background-color: rgba(255, 255, 255, 0.5);  
+}
+
+#gameOverMenu {
+    background-color: rgba(255, 255, 255, 0.5);
     padding: 10px;
-  }
-  
-  #saveButton{
-  
+}
+
+#saveButton {
     width: 75px;
     height: 75px;
     border-radius: 50%;
     background-color: rgba(0, 0, 0, 0);
     justify-content: flex-end;
-  
-  
-    
-  }
-  
-  #menuButton{
+}
+
+#menuButton {
     background-color: rgba(255, 255, 255, 0.8);
     width: 100%;
     height: 40px;
@@ -248,9 +217,9 @@
     text-align: center;
     color: black;
     font-weight: 900;
-  }
-  .overlay-panel{
-  
+}
+
+.overlay-panel {
     position: absolute;
     left: 0;
     top: 0;
@@ -258,97 +227,91 @@
     height: 100%;
     display: flex;
     justify-items: center;
-    margin-top: 20px;
-  }
-  
-  #playerStats{
-   
+}
+
+#playerStats {
     padding: 20px;
-    
-   
     z-index: 1;
-  }
-  /**HEALTH BAR CLASSES*/
-  
-  .health-box {
+}
+
+
+/**HEALTH BAR CLASSES*/
+
+.health-box {
     background-color: #ccc;
     width: 80%;
     height: 25px;
     position: relative;
     border: solid 1px #aaa;
     border-radius: 50px;
-  }
-  
-  .health-bar-filled {
-  
+}
+
+.health-bar-filled {
     background-color: #007f00;
     width: 100%;
     height: 23px;
-    position : absolute;
+    position: absolute;
     top: 0;
     left: 0;
     border-radius: 50px;
-  }
-  
-  .health-bar {
+}
+
+.health-bar {
     width: 100%;
     height: 100%;
     background-color: #cc0000;
-    
     border-radius: 50px;
-  }
-  
-  
-  #score{
-  
-    max-width: 100px; 
-    max-height: 50px; 
+}
+
+
+/*Score classes : */
+
+#score {
+    max-width: 100px;
+    max-height: 50px;
     background-color: white;
     border-radius: 50px;
-    text-align : center;
-  }
+    text-align: center;
+}
 
-
-  .scoreTable{
+.scoreTable {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
     background-color: white;
-    
     border-radius: 10px;
-    overflow: scroll;
-  }
-  ::-webkit-scrollbar {
+    overflow: auto;
+    width: 75%;
+}
+
+ ::-webkit-scrollbar {
     width: 8px;
     height: 10px;
+}
 
-  }
-  ::-webkit-scrollbar-thumb {
+ ::-webkit-scrollbar-thumb {
     border-radius: 8px;
     background: #c2c9d2;
-  }
-  
-  td, th{
+}
 
-    margin : 0 auto;
+td,
+th {
+    margin: 0 auto;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
 
-    margin-right: 10px;
-    
-  }
-
-   tr {
+tr {
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin: 5px 10px;
+    width: 100%;
+    font-size: 1.25rem;
+}
 
-    margin: 30px;
 
-  }
-  /**END OF HUD CLASSES*/
-  
-  
+/**END OF HUD CLASSES*/

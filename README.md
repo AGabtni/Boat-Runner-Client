@@ -1,8 +1,12 @@
-# BoatRunner
+# Boat Runner
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.3.
-It's a procedural runner type game using a WebGL framework : Three.js.
+## Description
+
+A 3D endless runner game using the [Three.JS](https://threejs.org/) javascript library .
+
+![Preview gif](src/assets/preview.gif)
 
 ## Link to live demo : 
+
 https://boat-runner-client.web.app/
 
