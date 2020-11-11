@@ -3,21 +3,23 @@
 
         <!--PREVIEW PANEL-->
         <div fxFlex fxLayout="column" class="overlay-panel" id="previewScreen" fxLayoutAlign="center" [@HUDFadeIn]="this.isPreviewVisible? 'fadeIn' : 'fadeOut'">
-            <div style="z-index : 0;width: 100%;height: 100%; margin: 0 auto; left: 0; top:0; position: absolute ;background-color: rgba(0, 0, 0, 0.4)">
+            <div style="z-index : 0;width: 100%;height: 100%; margin: 0 auto; left: 0; top:0; position: absolute ;background-color: #fdb353">
             </div>
+            <!--
             <video style="z-index:-1;width: 100%;height: 100%; margin: 0 auto; left: 0; top:0; position: absolute ;filter: blur(5px); " (click)="toggleVideo()" playsinline loop autoplay #videoPlayer>
                 <source src="../assets/videos/Preview_1.mp4" type="video/mp4" />
                 Browser not supported
             </video>
+            -->
             <div>
-                <button id="playButton" class="hvr-grow" mat-fab (click)="onPlayClick()">Play
+                <button id="playButton" class="hvr-grow mat-h1" (click)="onPlayClick()">Play
                 </button>
 
-                <span class="mat-h2 animate__animated animate__fadeInDownBig" style="font-weight: 900;position: absolute; left: 0; bottom :0; color : white; margin : 5px 10px">
+                <span class="mat-h1 animate__animated animate__fadeInUpBig" style="position: absolute; left: 0; top :0;  margin : 5px 10px">
                     Boat Runner
                 </span>
 
-                <span class="mat-h2 animate__animated animate__fadeInUpBig" style="font-weight: 900;position: absolute; right: 0; top :0; color : white ; margin : 5px 10px">
+                <span class="mat-h1 animate__animated animate__fadeInDownBig" style="position: absolute; right: 0; bottom :0;  margin : 5px 10px">
                     Made with Three.js
                 </span>
 
@@ -36,9 +38,10 @@
             <!--START SCREEN-->
             <div fxLayout="column" class="overlay-panel" id="startScreen" fxLayoutAlign="center center" [@HUDFadeIn]="!this.isLoading && !this.isPreviewVisible && this.isStartScreenVisible ? 'fadeIn' : 'fadeOut'">
 
-                <div fxLayout="row" fxLayoutAlign="center">
+                <!--TITLE-->
+                <div fxLayout="row" fxLayoutAlign="center" class="">
 
-                    <span style="text-align: center;" class="mat-h1">Infinite runner</span>
+                    <span id="title" style="text-align: center;" class="mat-h1 animate__animated animate__lightSpeedInRight">Boat runner</span>
 
                 </div>
 
@@ -46,12 +49,10 @@
 
                     <!-- Home Menu -->
                     <div class="menu" id="startMenu" [@HUDFadeIn]="this.isHomeMenuVisible ? 'fadeIn' : 'fadeIn'" fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
-                        <button id="menuButton" class="hvr-grow" (click)="onStartClick()">NEW GAME</button>
-                        <button id="menuButton" class="hvr-grow" (click)="getScores()">Most wanted sailors</button>
-                        <button id="menuButton" class="hvr-grow" (click)="refresh()">QUIT</button>
+                        <button id="menuButton" class="hvr-grow mat-h2" (click)="onStartClick()">NEW GAME</button>
+                        <!--<button id="menuButton" class="hvr-grow" (click)="getScores()">Most wanted sailors</button>-->
+                        <button id="menuButton" class="hvr-grow mat-h2" (click)="refresh()">QUIT</button>
                     </div>
-
-
 
                     <!--Score board -->
                     <div id="" class="menu" [@HUDFadeIn]="!this.isHomeMenuVisible ? 'fadeIn' : 'fadeOut'" fxFlex fxLayout="column" fxLayoutGap="20px">
@@ -87,39 +88,45 @@
             -->
                     </div>
 
-
                 </div>
-
             </div>
 
-            <!--GAME OVER LAYER-->
-            <div id="gameOverScreen" class="overlay-panel" fxLayout="column" fxFlexFill fxLayoutAlign="center center">
+            <!--GAME OVER SCREEN-->
+            <div class="overlay-panel" fxLayout="column" id="gameOverScreen" fxLayoutAlign="center center">
+                <div fxFlexFill fxFlex fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
 
+                    <!--Game over menu-->
+                    <div class="menu" id="gameOverMenu" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" [@HUDFadeIn]="this.isGameOverMenuVisible ? 'fadeIn' : 'fadeOut' ">
 
-                <div fxFlex fxFlexFill fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" class="menu" id="gameOverMenu">
+                        <!--<button id="menuButton" (click)="onSaveScoreClick()">SAVE SCORE</button>-->
+                        <button id="menuButton" class="mat-h2" (click)="replay()">RESTART</button>
+                        <button id="menuButton" class="mat-h2" (click)="refresh()">QUIT</button>
+                        <!--Score form-->
+                        <!--
+                <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px" id="gameOverMenu">
+                    <div class="sub-menu" fxFlex fxLayout="column" fxLayoutGap="20px"
+                        [@HUDFadeIn]="!this.isGameOverMenuVisible ? 'fadeIn' : 'fadeOut' ">
 
-
-
-                    <div class="sub-menu" fxFlex fxLayout="column" fxLayoutGap="20px" [@HUDFadeIn]="!this.isGameOverMenuVisible ? 'fadeIn' : 'fadeOut' ">
-
-                        <div fxFlexFill fxLayoutAlign="end">
+                        <div fxLayoutAlign="end">
                             <button id="saveButton" (click)="backGameOver()">
                                 <img src="../assets/icons/arrow_back.svg">
 
                             </button>
                         </div>
 
-                        <div fxLayout="column" fxFlex fxFlexFill fxLayoutAlign="start center">
+                        <div fxLayout="column" fxFlex fxLayoutAlign="start center">
 
                             <div class="form-group">
                                 <label for="alterEgo">Your Score</label>
                                 <span class="mat-h2 form-control">{{this.score}}</span>
                             </div>
-                            <form class="form form-row" fxLayout="column wrap" fxLayoutGap="20px" [formGroup]="scoreForm" (ngSubmit)="saveScore(scoreForm.value)">
+                            <form class="form form-row" fxLayout="column wrap" fxLayoutGap="20px"
+                                [formGroup]="scoreForm" (ngSubmit)="saveScore(scoreForm.value)">
                                 <div>
 
-                                    <!--SAILOR NAME FIELD-->
-                                    <mat-form-field data-aos="fade-right" data-aos-easing="ease-in-back" data-aos-delay="400" data-aos-offset="300" data-aos-duration="1000" data-aos-once="true" appearance="outline">
+                                    <mat-form-field data-aos="fade-right" data-aos-easing="ease-in-back"
+                                        data-aos-delay="400" data-aos-offset="300" data-aos-duration="1000"
+                                        data-aos-once="true" appearance="outline">
                                         <mat-label>Your Name</mat-label>
                                         <input matInput formControlName="name">
                                     </mat-form-field>
@@ -140,24 +147,17 @@
                         </div>
 
                     </div>
-
-                    <div class="sub-menu" fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px" [@HUDFadeIn]="this.isGameOverMenuVisible ? 'fadeIn' : 'fadeOut' ">
-
-                        <button id="menuButton" (click)="onSaveScoreClick()">SAVE SCORE</button>
-                        <button id="menuButton" (click)="replay()">RESTART</button>
-                        <button id="menuButton" (click)="refresh()">QUIT</button>
+                </div>
+                -->
 
                     </div>
-
-
                 </div>
-
             </div>
 
             <!--LOADING SCREEN-->
             <div fxFlex fxLayout="column" class="overlay-panel" id="loadingScreen" fxLayoutAlign="center center" [@HUDFadeIn]="this.isLoading && !this.isPreviewVisible? 'fadeIn' : 'fadeOut'">
                 <div>
-                    <div>...loading...</div>
+                    <div class="mat-h2">...loading...</div>
                     <div class="progress">
                         <div id="progressbar"></div>
                     </div>
@@ -176,26 +176,26 @@
                 </div>
 
 
-                <div id="score" fxLayout="row" fxLayoutAlign="center center">
+                <div id="score" class="mat-h1" fxLayout="row" fxLayoutAlign="center center">
 
-                    <span class="mat-h2"></span>
+                    <span></span>
                 </div>
 
 
             </div>
 
             <!--PAUSE MENU LAYER-->
-            <div id="pauseScreen" class="overlay-panel" fxLayout="column" fxLayoutAlign="center center" [@HUDFadeIn]="this.isPauseMenuVisible? 'fadeIn' : 'fadeOut'">
-                <div class="menu" id="pauseMenu" fxFlexFill fxFlex fxLayout="column" fxLayoutAlign="center center">
+            <div id="pauseScreen" class="overlay-panel" fxFlexFill fxLayout="column" fxLayoutAlign="center center" [@HUDFadeIn]="this.isPauseMenuVisible? 'fadeIn' : 'fadeOut'">
+                <div fxFlexFill fxFlex fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
 
-                    <div class="sub-menu" fxFlex fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="20px">
-                        <button id="menuButton" (click)="togglePause()">RESUME</button>
-                        <button id="menuButton" (click)="replay()">RESTART</button>
-                        <button id="menuButton" (click)="refresh()">QUIT</button>
+                    <div class="menu" id="pauseMenu" fxLayout="column" fxLayoutAlign="center center">
+
+                        <button id="menuButton" class="mat-h2" (click)="togglePause()">RESUME</button>
+                        <button id="menuButton" class="mat-h2" (click)="replay()">RESTART</button>
+                        <button id="menuButton" class="mat-h2" (click)="refresh()">QUIT</button>
+
                     </div>
-
                 </div>
-
             </div>
 
 

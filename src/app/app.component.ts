@@ -509,7 +509,7 @@ function resizeRendererToDisplaySize(renderer) {
   animations: [previewPanel, gameMenu, gameScreen]
 })
 export class AppComponent implements AfterViewInit {
-  @ViewChild('videoPlayer', { static: true }) videoplayer: any;
+  //@ViewChild('videoPlayer', { static: true }) videoplayer: any;
 
   public scores;
 
@@ -552,7 +552,7 @@ export class AppComponent implements AfterViewInit {
 
   ngOnInit() {
 
-    this.videoplayer.nativeElement.play();
+    //this.videoplayer.nativeElement.play();
   }
 
   ngAfterViewInit() {
@@ -710,12 +710,13 @@ export class AppComponent implements AfterViewInit {
         },
         // onProgress callback
         function (xhr) {
-          console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+          //console.log((xhr.loaded / xhr.total * 100) + '% loaded');
         },
 
         // onError callback
         function (err) {
           console.log('An error happened');
+          console.log(err);
         }
       )
     }
@@ -758,7 +759,7 @@ export class AppComponent implements AfterViewInit {
 
 
   toggleVideo(event: any) {
-    this.videoplayer.nativeElement.play();
+    //this.videoplayer.nativeElement.play();
   }
   //In both gameOverScreen and pauseScreen
   replay() {

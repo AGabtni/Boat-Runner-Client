@@ -13,9 +13,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 
+
 //ANGULAR MATERIAL IMPORTS
-import  { 
-  MatCardModule, 
+import {
+  MatCardModule,
   MatInputModule
 
 } from '@angular/material';
@@ -33,13 +34,13 @@ import  {
     FlexLayoutModule,
     FormsModule, ReactiveFormsModule,
     ScrollingModule,
-    HttpClientModule, 
-    AnimateOnScrollModule.forRoot()
+    HttpClientModule,
+    AnimateOnScrollModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
 
 
 
